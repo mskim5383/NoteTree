@@ -14,9 +14,15 @@ Including another URLconf
     2. Import the include() function: from django.conf.urls import url, include
     3. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
-from django.conf.urls import url
+from django.conf.urls import include, url
 from django.contrib import admin
+from settings import BASE_DIR
+import os
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+
+    # Media Root
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
+        {'document_root': os.path.join(BASE_DIR, 'static')}),
 ]
