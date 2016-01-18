@@ -20,6 +20,7 @@ import os
 
 urlpatterns = [
     url(r'^login/$', 'apps.session.views.user_login'),
-    url(r'^logout/$', 'apps.session.view.user_logout'),
+    url(r'^logout/$', 'apps.session.views.user_logout'),
+    url(r'^register/$', 'apps.session.views.register'),
 
 ]
