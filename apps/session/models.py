@@ -11,6 +11,5 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User,
                                 primary_key=True, related_name='userprofile')
 
-
     def __str__(self):
         return "User %s's profile object" % (self.user)
