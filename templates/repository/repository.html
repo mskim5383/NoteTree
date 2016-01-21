@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <div class="username">
+        {{ repository.userprofile }}
+    </div>
+    <div class="repository-name">
+        {{ repository }}
+    </div>
+    {% for branch in repository.branch.all %}
+    <div class="branch">
+        {{ branch }}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

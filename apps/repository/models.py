@@ -7,18 +7,24 @@ from django.db import models
 
 
 class Repository(models.Model):
+    name = models.CharField(max_length=20, null=False, default='')
     userprofile = models.ForeignKey('session.UserProfile',
                                     null=False, related_name='repository')
-    master_branch = models.OneToOneField('Branch',
-                                    null=False, related_name='_repository')
     readme = models.TextField(default='', max_length=1000)
 
 
+    def __str__(self):
+        return 'Repository: %s/%s' % (self.userprofile.user.username, self.name)
+
+
 class Branch(models.Model):
+    name = models.CharField(max_length=20, null=False, default='')
     repository = models.ForeignKey('Repository',
                                 null=False,  related_name='branch')
-    head_commit = models.OneToOneField('Commit',
-                                null=False, related_name='_branch')
+
+
+    def __str__(self):
+        return 'Branch: %s/%s/%s' % (self.repository.userprofile.user.username, self.repository.name, self.name)
 
 
 class Commit(models.Model):
@@ -27,6 +33,7 @@ class Commit(models.Model):
 
 
 class Movement(models.Model):
+    name = models.CharField(max_length=20, null=False, default='')
     commit = models.ForeignKey('Commit',
                                 null=False, related_name='movement')
     meta_data = models.TextField(default='', max_length=200)
