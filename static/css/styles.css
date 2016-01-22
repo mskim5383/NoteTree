@@ -1,10 +1,29 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:700);
-.dark-theme{
-  background-color:#000000;
+
+.dark-theme {
+  background-color:#000;
 }
+.white-theme{
+  background-color:#fff;
+}
+.dark-theme #footer{
+  background-color:#000;
+}
+.white-theme #footer{
+  background-color:#fff;
+}
+
+input {
+    -webkit-appearance: textfield;
+    -webkit-rtl-ordering: logical;
+    -webkit-user-select: text;
+    cursor: auto;
+}
+
 #cssmenu {
   width: auto;
   vertical-align:middle;
+  background-color:#000;
 }
 #cssmenu ul {
   list-style: none;
@@ -120,9 +139,5 @@
   #cssmenu ul li a:before {
     display: none;
   }
-}
-
-#footer {
-  background-color: #000;
 }
 

@@ -15,17 +15,15 @@
         <link rel="stylesheet" href="/media/css/styles.css">
         {% block css %}{% endblock %}
         <script src="//code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-        <script src="script.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         {% block js %}{% endblock %}
     </head>
     {% if dark_theme %}
-    <body class='dark-theme'>
-        <div id='cssmenu' class='dark-theme'>
+    <body class="dark-theme">
     {% else %}
-    <body>
-        <div id='cssmenu'>
+    <body class="white-theme">
     {% endif %}
+        <div id='cssmenu'>
         <ul>
             <li><a href='/'><span>NoteTree</span></a></li>
             <li><a href='/repository/'><span>Repository</span></a></li>
@@ -37,7 +35,7 @@
         {% endblock %}
         <div id='footer' class="text-center">
             <p>
-                <a href="/main/credit/">Credit</a>
+               <a href="/main/credit/">Credit</a>
                 <a href="#">Contact Us</a>
             </p>
             <p>
@@ -45,4 +43,5 @@
             </p>
         </div>
     </body>
+
 </html>
