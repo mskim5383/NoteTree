@@ -19,12 +19,12 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         {% block js %}{% endblock %}
     </head>
-    {% if user.is_authenticated %}
-    <body>
-        <div id='cssmenu'>
-    {% else %}
+    {% if dark_theme %}
     <body class='dark-theme'>
         <div id='cssmenu' class='dark-theme'>
+    {% else %}
+    <body>
+        <div id='cssmenu'>
     {% endif %}
         <ul>
             <li><a href='/'><span>NoteTree</span></a></li>
