@@ -1,4 +1,4 @@
-from models import Repository
+from models import Repository, Branch
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 
@@ -17,6 +17,10 @@ class RepositoryForm(ModelForm):
     def save(self, *args, **kwargs):
         self.instance.userprofile = self.userprofile
         super(RepositoryForm, self).save(*args, **kwargs)
+        master_branch = Branch()
+        master_branch.name = 'master'
+        master_branch.repository = self.instance
+        master_branch.save()
         return self.instance
 
     def clean(self):
