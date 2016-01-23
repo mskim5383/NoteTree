@@ -3,15 +3,61 @@
 <div class="container">
     <div class="username">
     </div>
-    <ul class="nav nav-tabs">
-  		<li><a href="#">Contributions</a></li>
-  		<li><a href="#">Repositories</a></li>
-  		<li><a href="#">Public activity</a></li>
-	</ul>
-    {% for repository in userprofile.repository.all %}
-    <div class="repository">
-        {{ repository }}
+    <div class="blank-between">
     </div>
-    {% endfor %}
+    <div class="row">
+    	<div class="col-sm-3">
+    		<a href="#" class="thumbnail">
+    			<img src="/media/img/up.jpg" class="img-responsive" alt="user_profile">
+    		</a>
+    		<h1 id="username">
+				<script type="text/javascript">
+					document.write(location.pathname.split("/")[1]);
+				</script>
+			</h1>
+		<hr>
+		</hr>
+		<div class="user_stats">
+			<h4 class="call">
+				<span class='bigger'>
+					<script type="text/javascript">
+						document.write({{ userprofile.repository.all|length }});
+					</script>
+				</span> 
+				repositories
+			</h4>
+		</div>
+
+    	</div>
+    	<div class="col-sm-9">
+	    	<div class="col-sm-6">
+	    		<div class="panel panel-default">
+	  				<div class="panel-heading panel-heading-custom">Popular repositories
+	  				</div>
+	  						<ul class="list-group">
+	  						{% for repo in userprofile.repository.all|slice:":5"%}
+	  							<a class="list-group-item" id = "pl"{{ forloop.counter }} href="./{{ repo.name }}">
+	  								{{ repo.name }}
+	  							</a>
+	      					{% endfor %}
+	      					</ul>
+				</div>
+			</div>
+			<div class="col-sm-6">
+	    		<div class="panel panel-default">
+	  				<div class="panel-heading panel-heading-custom">Repositories contributed to
+	  				</div>
+	  						<ul class="list-group">
+	  						{% for repo in userprofile.repository.all|slice:":5"%}
+	  							<li class="list-group-item" id = "pl"{{ forloop.counter }}>{{ repo.name }}</li>
+	      					{% endfor %}
+	      					</ul>
+				</div>
+			</div>
+		</div>
+    </div>
 </div>
+{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="/media/css/userprofile.css">
 {% endblock %}
