@@ -30,18 +30,31 @@ class Branch(models.Model):
 class Commit(models.Model):
     branch = models.ForeignKey('Branch',
                                 null=False, related_name='commit')
-
-
-class Movement(models.Model):
-    name = models.CharField(max_length=20, null=False, default='')
-    commit = models.ForeignKey('Commit',
-                                null=False, related_name='movement')
     meta_data = models.TextField(default='', max_length=200)
-    no = models.IntegerField(default=-1)
+
+    def clone(self):
+        commit = Commit()
+        commit.branch = self.branch
+        commit.meta_data = self.meta_data
+        commit.save()
+        for part in self.part.all():
+            p = part.clone()
+            part.commit = commit
+            part.save()
+        return commit
 
 
 class Part(models.Model):
+    commit = models.ForeignKey('Commit',
+                                null=False, related_name='part')
     order = models.IntegerField(default=-1)
     meta_data = models.TextField(default='', max_length=200)
     notes = models.TextField(default='', max_length=10000)
+
+    def clone(self):
+        part = Part()
+        part.order = self.order
+        part.meta_data = self.meta_data
+        part.notes = self.notes
+        return part
 
