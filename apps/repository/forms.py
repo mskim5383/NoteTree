@@ -39,7 +39,7 @@ class RepositoryForm(ModelForm):
 class BranchForm(ModelForm):
     class Meta:
         model = Branch
-        exclude = {'repository'}
+        exclude = ['repository']
 
 
     def __init__(self, *args, **kwargs):
@@ -62,4 +62,23 @@ class BranchForm(ModelForm):
             if Branch.objects.filter(repository=self.repository, name=name).exists():
                 self.add_error('name', 'already exist')
         return cleaned_data
+
+class CommitForm(ModelForm):
+    class Meta:
+        model = Commit
+        exclude = ['branch']
+
+
+    def __init__(self, *args, **kwargs):
+        self.branch = kwargs.pop('branch', None)
+        super(CommitForm, self).__init__(*args, **kwargs)
+
+    def save(self, *args, **kwargs):
+        parts = kwargs.pop('parts', [])
+        self.instance.branch = self.branch
+        super(CommitForm, self).save(*args, **kwargs)
+        for part in parts:
+            part.branch = self.instance
+            part.save()
+        return self.instance
 

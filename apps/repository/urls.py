@@ -24,5 +24,6 @@ urlpatterns = [
     url(r'^([\w \[\]\.]+)/([\w \[\]\.]+)/$', 'apps.repository.views.repository'),
     url(r'^([\w \[\]\.]+)/([\w \[\]\.]+)/create_branch/$', 'apps.repository.views.create_branch'),
     url(r'^([\w \[\]\.]+)/([\w \[\]\.]+)/([\w \[\]\.]+)/$', 'apps.repository.views.branch'),
+    url(r'^([\w \[\]\.]+)/([\w \[\]\.]+)/([\w \[\]\.]+)/([\d]+)/$', 'apps.repository.views.commit'),
 
 ]
