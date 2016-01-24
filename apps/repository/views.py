@@ -5,7 +5,7 @@ from django.http import Http404
 
 from apps.session.models import UserProfile
 from apps.repository.models import Repository
-from apps.repository.forms import RepositoryForm, BranchForm, CommitForm
+from apps.repository.forms import RepositoryForm, BranchForm, CommitForm, PartFormSet
 
 # Create your views here.
 
@@ -63,13 +63,21 @@ def commit(request, username, repo_name, branch_name, commit_id):
     userprofile, repository, branch, commit = validity_check(username, repo_name, branch_name, commit_id)
     if request.method == 'POST':
         commit_form = CommitForm(request.POST, branch=branch)
-        if commit_form.is_valid():
+        part_form = PartFormSet(request.POST)
+        if commit_form.is_valid() and part_form.is_valid():
             commit = commit_form.save()
+            parts = part_form.save(commit=False)
+            for part in part_form.deleted_objects:
+                part.delete()
+            for part in parts:
+                part.commit = commit
+                part.save()
             return redirect('../' + str(commit.id))
     else:
         commit_form = CommitForm(initial={'meta_data': commit.meta_data})
+        part_form = PartFormSet()
     return render(request, 'repository/commit.html',
-                    {'commit': commit, 'commit_form': commit_form})
+            {'commit': commit, 'commit_form': commit_form, 'part_form': part_form})
 
 
 
