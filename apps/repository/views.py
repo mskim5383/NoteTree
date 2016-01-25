@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.http import Http404
 
 from apps.session.models import UserProfile
-from apps.repository.models import Repository
+from apps.repository.models import Repository, Part
 from apps.repository.forms import RepositoryForm, BranchForm, CommitForm, PartFormSet
 
 # Create your views here.
@@ -63,21 +63,33 @@ def commit(request, username, repo_name, branch_name, commit_id):
     userprofile, repository, branch, commit = validity_check(username, repo_name, branch_name, commit_id)
     if request.method == 'POST':
         commit_form = CommitForm(request.POST, branch=branch)
-        part_form = PartFormSet(request.POST)
-        if commit_form.is_valid() and part_form.is_valid():
+        if commit_form.is_valid():
             commit = commit_form.save()
-            parts = part_form.save(commit=False)
-            for part in part_form.deleted_objects:
-                part.delete()
-            for part in parts:
-                part.commit = commit
-                part.save()
+            try:
+                part_count = int(request.POST.get("part-count", 0))
+            except ValueError:
+                part_count = 0
+            for i in range(part_count):
+                try:
+                    part_order = int(request.POST.get("part-order-" + str(i + 1)))
+                    part_meta = request.POST.get("part-meta-" + str(i + 1), "")
+                    part_notes = request.POST.get("part-notes-" + str(i + 1), "")
+                    part_deleted = int(request.POST.get("part-deleted-" + str(i + 1)))
+                except:
+                    continue
+                if part_deleted == 0:
+                    part = Part()
+                    part.commit = commit
+                    part.order = part_order
+                    part.meta_data = part_meta
+                    part.notes = part_notes
+                    part.save()
+
             return redirect('../' + str(commit.id))
     else:
         commit_form = CommitForm(initial={'meta_data': commit.meta_data})
-        part_form = PartFormSet()
     return render(request, 'repository/commit.html',
-            {'commit': commit, 'commit_form': commit_form, 'part_form': part_form})
+            {'commit': commit, 'commit_form': commit_form})
 
 
 
