@@ -17,7 +17,7 @@
     font-family: 'Open Sans', sans-serif;
     font-weight:700;
     font-size:14px;
-    margin:11px;
+    margin:10px;
     display: block;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -36,7 +36,7 @@
     position: relative;
     z-index: 2;
     background: #fff 
-ㅡ}
+}
 
 #s::-webkit-input-placeholder, #s:-moz-placeholder {
     color: #000;
