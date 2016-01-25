@@ -47,6 +47,14 @@ class Commit(models.Model):
             part.save()
         return commit
 
+    def abc(self):
+        ret = self.meta_data + '\n'
+        ret2 = ""
+        for part in self.part.order_by('order'):
+            ret += part.meta_data + '\n'
+            ret2 += part.notes + '\n'
+        return ret + ret2
+
 
 class Part(models.Model):
     commit = models.ForeignKey('Commit',
