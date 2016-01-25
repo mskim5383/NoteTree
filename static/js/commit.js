@@ -36,12 +36,13 @@ function RefreshDeleteListener() {
    $(".part-container #part-delete").on("click", function() {
        $(this).parent().children("#deleted").attr("value", 1);
        $(this).parent().css("display", "none");
+       $(this).parent().attr("class", "part-container-deleted");
    });
 };
 
 function RefreshABCListener() {
   $("#part-order, #part-meta, #part-notes, #id_meta_data").off();
-  $("#part-order, #part-meta, #part-notes, #id_meta_data").on("change keyup paste", function() {
+  $("#part-order, #part-meta, #part-notes, #id_meta_data, #part-delete").on("change keyup paste click", function() {
       var part_list = $(".part-container").sort(ComparePart);
       var text = $("#id_meta_data").val() + "\n";
       var text2 = "";
