@@ -1,6 +1,5 @@
 from django.contrib.auth.models import User
 from django.forms import ModelForm
-from django.forms.models import modelformset_factory
 
 from models import Repository, Branch, Commit, Part
 
@@ -78,17 +77,3 @@ class CommitForm(ModelForm):
         self.instance.branch = self.branch
         super(CommitForm, self).save(*args, **kwargs)
         return self.instance
-
-class PartForm(ModelForm):
-    class Meta:
-        model = Part
-        exclude = ['commit']
-
-
-
-PartFormSet = modelformset_factory(
-        model=Part,
-        form=PartForm,
-        can_delete=True,
-        max_num=20,
-        validate_max=True)

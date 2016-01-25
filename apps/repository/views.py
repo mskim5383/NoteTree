@@ -5,7 +5,7 @@ from django.http import Http404
 
 from apps.session.models import UserProfile
 from apps.repository.models import Repository, Part
-from apps.repository.forms import RepositoryForm, BranchForm, CommitForm, PartFormSet
+from apps.repository.forms import RepositoryForm, BranchForm, CommitForm
 
 # Create your views here.
 
