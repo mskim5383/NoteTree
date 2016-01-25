@@ -13,12 +13,35 @@
   background-color:#fff;
 }
 
-input {
-    -webkit-appearance: textfield;
-    -webkit-rtl-ordering: logical;
-    -webkit-user-select: text;
-    cursor: auto;
+#s {
+    font-family: 'Open Sans', sans-serif;
+    font-weight:700;
+    font-size:14px;
+    margin:11px;
+    display: block;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 12px 48px 12px 12px;
+  
+    -webkit-border-radius: 200px;
+    -moz-border-radius: 200px;
+    border-radius: 200px;
+  
+    width: 200px;
+    height: 16px;
+    color: #000;
+    border: none;
+    outline: none;
+  
+    position: relative;
+    z-index: 2;
+    background: #fff 
+ㅡ}
+
+#s::-webkit-input-placeholder, #s:-moz-placeholder {
+    color: #000;
 }
+
 
 #cssmenu {
   width: auto;
@@ -52,7 +75,7 @@ input {
 #cssmenu.align-center ul {
   text-align: center;
 }
-#cssmenu ul li a {
+#cssmenu .NTnavBar {
   color: #ffffff;
   text-decoration: none;
   display: block;
@@ -139,5 +162,52 @@ input {
   #cssmenu ul li a:before {
     display: none;
   }
+}
+
+
+#footer{
+  padding:25px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+footer{
+  padding:25px 0;
+  text-align:center
+}
+footer span.copyright{
+  line-height:40px;
+  font-family:'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  text-transform:uppercase;
+}
+footer ul.quicklinks{
+  margin-bottom:0;
+  line-height:40px;
+  font-family:'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  text-transform:uppercase;
+}
+ul.social-buttons{
+  margin-bottom:0
+}
+ul.social-buttons li a{
+  display:block;background-color:#222;
+  height:40px;
+  width:40px;
+  border-radius:100%;
+  font-size:20px;
+  line-height:40px;
+  color:#fff;
+  outline:0;
+  -webkit-transition:all .3s;
+  -moz-transition:all .3s;
+  transition:all .3s
+}
+ul.social-buttons li a:hover,ul.social-buttons li a:focus,ul.social-buttons li a:active{
+  background-color:#fed136
 }
 

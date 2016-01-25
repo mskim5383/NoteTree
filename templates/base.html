@@ -23,25 +23,49 @@
     {% else %}
     <body class="white-theme">
     {% endif %}
-        <div id='cssmenu'>
-        <ul>
-            <li><a href='/'><span>NoteTree</span></a></li>
-            <li><a href='/repository/'><span>Repository</span></a></li>
-            <li><a href='/session/'><span>Session</span></a></li>
-            <li class='last'><a href='#'><span>Contact</span></a></li>
-        </ul>
+        <div class="row">
+            <div class="col-xs-2">
+            </div>
+            <div class="col-xs-6">
+                <div id='cssmenu'>
+                    <ul>
+                        <li><a href='/' class="NTnavBar"><span>NoteTree</span></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <input id="s" type="search" placeholder="Search">
+            </div>
         </div>
         {% block content %}
         {% endblock %}
-        <div id='footer' class="text-center">
-            <p>
-               <a href="/main/credit/">Credit</a>
-                <a href="#">Contact Us</a>
-            </p>
-            <p>
-                <span>Copyright 2016 KAO. All rights reserved.</span>
-            </p>
-        </div>
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <span class="copyright">Copyright &copy; KAO 2016</span>
+                    </div>
+                    <div class="col-md-4">
+                        <ul class="list-inline social-buttons">
+                            <li><a href="#"><i class="fa fa-twitter"></i></a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-facebook"></i></a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <ul class="list-inline quicklinks">
+                            <li><a href="#">Privacy Policy</a>
+                            </li>
+                            <li><a href="#">Terms of Use</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </body>
 
 </html>
