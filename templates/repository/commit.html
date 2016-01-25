@@ -5,9 +5,12 @@
 {% endblock %}
 {% block content %}
 <div class="container">
+    <textarea name="abc" id="abc" style="display: None;"></textarea>
     <div class="commit">
         {{ commit }}
     </div>    
+    <div id="warnings"></div>
+    <div id="paper0"></div>
     <form action="./" method="POST" enctype="application/json">
         {% csrf_token %}
         {{ commit_form|bootstrap }}
@@ -15,9 +18,9 @@
         <div class="part-list-container">
             {% for part in commit.part.all %}
             <div class="part-container" style="display: block;">
-                <input class="form-control" id="part-order-{{ forloop.counter }}" name="part-order-{{ forloop.counter }}" type="number" value={{ part.order }} />
-                <input class="form-control" id="part-meta-{{ forloop.counter }}" name="part-meta-{{ forloop.counter }}" type="text" value={{ part.meta_data}} />
-                <input class="form-control" id="part-notes-{{ forloop.counter }}" name="part-notes-{{ forloop.counter }}" type="text" value={{ part.notes }} />
+                <input class="form-control" id="part-order" name="part-order-{{ forloop.counter }}" type="number" value={{ part.order }} />
+                <textarea class="form-control" id="part-meta" name="part-meta-{{ forloop.counter }}" type="text">{{ part.meta_data}}</textarea>
+                <textarea class="form-control" id="part-notes" name="part-notes-{{ forloop.counter }}" type="text">{{ part.notes }}</textarea>
                 <input class="hidden" id="deleted" name="part-deleted-{{ forloop.counter }}" type="number" value=0 />
                 <a href="javascript:void(0);" class="btn btn-warning" id="part-delete">Delete</a>
             </div>
