@@ -43,11 +43,11 @@ function RefreshABCListener() {
   $("#part-order, #part-meta, #part-notes, #id_meta_data").off();
   $("#part-order, #part-meta, #part-notes, #id_meta_data").on("change keyup paste", function() {
       var part_list = $(".part-container").sort(ComparePart);
-      var text = $("#id_meta_data")[0].value + "\n";
+      var text = $("#id_meta_data").val() + "\n";
       var text2 = "";
       for (var i = 0; i < part_list.length; i++) {
-         text += $(part_list[i]).children("#part-meta")[0].value + "\n";
-         text2 += $(part_list[i]).children("#part-notes")[0].value + "\n";
+         text += $(part_list[i]).children("#part-meta").val() + "\n";
+         text2 += $(part_list[i]).children("#part-notes").val() + "\n";
       };
       $("textarea#abc").text(text + text2);
   });
@@ -55,7 +55,7 @@ function RefreshABCListener() {
 
 
 function ComparePart(a, b) {
-    var a_order = parseInt($(a).children("#part-order").attr("value"));
-    var b_order = parseInt($(b).children("#part-order").attr("value"));
+    var a_order = parseInt($(a).children("#part-order").val());
+    var b_order = parseInt($(b).children("#part-order").val());
     return ((a_order < b_order) ? -1 : ((a_order > b_order) ? 1 : 0));
 };
