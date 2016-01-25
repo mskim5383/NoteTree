@@ -13,6 +13,11 @@
   background-color:#fff;
 }
 
+.row{
+  margin-right:0;
+  margin-left:0;
+}
+
 #s {
     font-family: 'Open Sans', sans-serif;
     font-weight:700;
