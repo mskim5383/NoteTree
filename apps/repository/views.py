@@ -58,7 +58,7 @@ def manage_repository(request, username, repo_name):
 
 def branch(request, username, repo_name, branch_name):
     userprofile, repository, branch = validity_check(username, repo_name, branch_name)
-    return render(request, 'repository/branch.html',
+    return render(request, 'repository/branch_main.html',
                     {'branch': branch})
 
 def create_branch(request, username, repo_name):

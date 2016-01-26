@@ -27,15 +27,29 @@
         <div class="row dark-theme">
             <div class="col-xs-2 dark-theme">
             </div>
-            <div class="col-xs-6">
+            <div class="col-xs-3">
                 <div id='cssmenu'>
                     <ul>
                         <li><a href='/' class="NTnavBar"><span>NoteTree</span></a></li>
                     </ul>
                 </div>
             </div>
-            <div class="col-xs-4 dark-theme">
-                <input id="s" type="search" placeholder="Search">
+            <div class="col-xs-5 dark-theme">
+                <span style="float:right; display:inline-block;">
+                    <input id="s" type="search" placeholder="Search" style="display:inline-block;">
+                    <div id='cssmenu' style="display:inline-block;">
+                        <ul>
+                            {% if user.is_authenticated %}
+                            <li><a href='/{{ user.username }}' class="NTnavBar"><span>Profile</span></a></li>
+                            <li><a href='/session/logout' class="NTnavBar"><span>Logout</span></a></li>
+                            {% else %}
+                            <li><a href='/session/login' class="NTnavBar"><span>Login</span></a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </span>
+            </div>
+            <div class="col-xs-2 dark-theme">
             </div>
         </div>
         {% block content %}

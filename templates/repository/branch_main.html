@@ -1,0 +1,18 @@
+{% extends "repository/branch.html" %}
+{% block branch_content %}
+<div class="container sheet">
+		<ul class="nav nav-tabs">
+  			<li role="presentation" class="active"><a href="#">Home</a></li>
+  			<li role="presentation"><a href="#">Profile</a></li>
+  			<li role="presentation"><a href="#">Messages</a></li>
+		</ul>
+		<textarea id="abc" style="display: None;">{{ branch.commit.reverse.0.abc }}</textarea>
+		<div id="warnings"></div>
+		<div id="paper0"></div>
+</div>
+<div class="container">
+	<button type="button" class="btn btn-default">
+		<span href="../{{ branch.commit.reverse.0.id }}"></span>Add Commit
+	</button>
+</div>
+{% endblock %}

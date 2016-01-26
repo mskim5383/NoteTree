@@ -1,0 +1,35 @@
+.container{
+	width:1000px;
+}
+
+.blank-top{
+	height:50px;
+}
+
+.btn-group{
+	background-color:#000;
+}
+
+.status_bar{
+	border: 1px solid #222;
+}
+.pills_center ul{
+	margin: auto;
+    width: 70%;
+}
+
+.nav-pills a{
+	color:#000;
+}
+
+.dropdown {
+	margin-top:10px;
+}
+
+.dropdown a{
+	color:#000;
+}
+.sheet {
+	width:50%;
+	margin:auto;
+}

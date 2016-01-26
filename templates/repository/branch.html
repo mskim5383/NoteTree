@@ -1,10 +1,70 @@
 {% extends "base.html" %}
+{% block js %}
+<script src="/media/js/branch.js" type="text/javascript"></script>
+{% endblock %}
 {% block content %}
-<div class="container">
-    {% for commit in branch.commit.all %}
-    <div class="commit">
-        {{ commit }}
-    </div>
-    {% endfor %}
+<div class="container blank-top">
+    
 </div>
+
+<div class="container status_bar">
+	<div class="row">
+		<div class="col-xs-3 pills_center">
+			<ul class="nav nav-pills">
+	  			<li role="presentation">
+	  				<a href="#">
+	  					<span class="glyphicon glyphicon-upload" aria-hidden="true"></span> 
+	  					<span>{{ branch.commit.count }}</span>
+	  					commits
+	  				</a>
+	  			</li>
+	  		</ul>
+		</div>
+		<div class="col-xs-3 pills_center">
+			<ul class="nav nav-pills">
+	  			<li role="presentation">
+	  				<a href="#">
+	  					<span class="glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
+	  					<span>{{ branch.repository.branch.count }}</span>
+	  					branch
+	  				</a>
+	  			</li>
+	  		</ul>
+		</div>
+		<div class="col-xs-3 pills_center">
+			<ul class="nav nav-pills">
+	  			<li role="presentation">
+	  				<a href="#">
+	  					<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+	  					<span>{{ branch.repository.contributor.count }}</span>
+	  					contributors
+	  				</a>
+	  			</li>
+	  		</ul>
+		</div>
+		<div class="col-xs-3 pills_center">
+			<ul>
+				<div class="dropdown">
+				  <a class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+				    {{ branch.name }}
+				    <span class="caret"></span>
+				  </a>
+				  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+				  	{% for br in branch.repository.branch.all %}
+				  		<li><a href="../{{ br.name }}"> {{ br.name }} </a><li>
+				  	{% endfor %}
+				  </ul>
+				</div>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="container" style="height:40px;">
+</div>
+{% block branch_content %}
+{% endblock %}
+
+{% endblock %}
+{% block css %}
+<link href="/media/css/branch_base.css" rel="stylesheet">
 {% endblock %}
