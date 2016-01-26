@@ -19,6 +19,7 @@ from django.contrib import admin
 import os
 
 urlpatterns = [
+    url(r'^search/$', 'apps.repository.views.search_repository'),
     url(r'^([\w \[\]\.]+)/$', 'apps.repository.views.userprofile'),
     url(r'^([\w \[\]\.]+)/create_repository/$', 'apps.repository.views.create_repository'),
     url(r'^([\w \[\]\.]+)/([\w \[\]\.]+)/$', 'apps.repository.views.repository'),

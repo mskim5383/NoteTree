@@ -55,6 +55,12 @@ def manage_repository(request, username, repo_name):
     return render(request, 'repository/manage_repository.html',
             {'repository': repository, 'contributor_form': contributor_form})
 
+def search_repository(request):
+    keyword = request.GET.get('keyword', '')
+    repository_list = Repository.objects.filter(name__contains=keyword)
+    return render(request, 'repository/search.html',
+            {'repository_list': repository_list, 'keyword': keyword})
+
 
 def branch(request, username, repo_name, branch_name):
     userprofile, repository, branch = validity_check(username, repo_name, branch_name)
