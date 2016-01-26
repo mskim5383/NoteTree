@@ -16,6 +16,11 @@ class Repository(models.Model):
     def __str__(self):
         return 'Repository: %s/%s' % (self.userprofile.user.username, self.name)
 
+    def is_valid(self, userprofile):
+        if self.contributor.filter(userprofile=userprofile).exists():
+            return True
+        return False
+
 
 class Contributor(models.Model):
     userprofile = models.ForeignKey('session.UserProfile',

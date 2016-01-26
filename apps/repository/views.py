@@ -71,7 +71,7 @@ def create_branch(request, username, repo_name):
     if not request.user.is_authenticated():
         raise Http404
     userprofile, repository = validity_check(username, repo_name)
-    if userprofile != request.user.userprofile:
+    if not repository.is_valid(request.user.userprofile):
         raise Http404
     if request.method == 'POST':
         branch_form = BranchForm(request.POST, repository=repository)
@@ -91,6 +91,8 @@ def commit(request, username, repo_name, branch_name, commit_id):
     userprofile, repository, branch, commit = validity_check(username, repo_name, branch_name, commit_id)
     if request.method == 'POST':
         if not request.user.is_authenticated():
+            raise Http404
+        if not repository.is_valid(request.user.userprofile):
             raise Http404
         commit_form = CommitForm(request.POST, branch=branch)
         if commit_form.is_valid():

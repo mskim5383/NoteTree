@@ -30,6 +30,10 @@ class RepositoryForm(ModelForm):
         commit.branch = master_branch
         commit.meta_data = "X: 1\nT: %s\nL:1/4\nK:G\n" % self.instance.name
         commit.save()
+        contributor = Contributor()
+        contributor.userprofile = self.userprofile
+        contributor.repository = self.instance
+        contributor.save()
         return self.instance
 
     def clean(self):
