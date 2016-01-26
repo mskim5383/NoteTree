@@ -18,7 +18,7 @@ class UserProfile(models.Model):
     def get_thumbnail_url(self):
         if self.thumbnail:
             return '/upload/'+self.thumbnail.url.split('/')[-1]
-        return '/media/default.jpg'
+        return '/media/img/default.jpg'
 
     def __str__(self):
         return "User %s's profile object" % (self.user)
