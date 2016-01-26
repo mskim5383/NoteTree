@@ -21,8 +21,9 @@ def userprofile(request, username):
 
 def repository(request, username, repo_name):
     userprofile, repository = validity_check(username, repo_name)
+    master = repository.branch.get(name='master')
     return render(request, 'repository/repository.html',
-                    {'repository': repository})
+                    {'repository': repository, 'branch': master})
 
 def create_repository(request, username):
     if not request.user.is_authenticated():
