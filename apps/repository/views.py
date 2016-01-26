@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.http import Http404
 
 from apps.session.models import UserProfile
-from apps.repository.models import Repository, Part
+from apps.repository.models import Repository, Part, Star
 from apps.repository.forms import RepositoryForm, BranchForm, CommitForm, ContributorForm
 
 # Create your views here.
@@ -60,6 +60,12 @@ def search_repository(request):
     return render(request, 'repository/search.html',
             {'repository_list': repository_list, 'keyword': keyword})
 
+def star(request, username, repo_name):
+    result = {'status': 'bad'}
+    if request.method == 'POST':
+        pass
+    return
+
 
 def branch(request, username, repo_name, branch_name):
     userprofile, repository, branch = validity_check(username, repo_name, branch_name)
@@ -99,7 +105,7 @@ def commit(request, username, repo_name, branch_name, commit_id):
             raise Http404
         if not repository.is_valid(request.user.userprofile):
             raise Http404
-        commit_form = CommitForm(request.POST, branch=branch)
+        commit_form = CommitForm(request.POST, branch=branch, userprofile=request.user.userprofile)
         if commit_form.is_valid():
             commit = commit_form.save()
             try:

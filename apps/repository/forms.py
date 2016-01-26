@@ -74,15 +74,17 @@ class BranchForm(ModelForm):
 class CommitForm(ModelForm):
     class Meta:
         model = Commit
-        exclude = ['branch']
+        exclude = ['branch', 'userprofile']
 
 
     def __init__(self, *args, **kwargs):
         self.branch = kwargs.pop('branch', None)
+        self.userprofile = kwargs.pop('userprofile', None)
         super(CommitForm, self).__init__(*args, **kwargs)
 
     def save(self, *args, **kwargs):
         self.instance.branch = self.branch
+        self.instance.userprofile = self.userprofile
         super(CommitForm, self).save(*args, **kwargs)
         return self.instance
 

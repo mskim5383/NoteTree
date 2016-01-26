@@ -46,6 +46,8 @@ class Branch(models.Model):
 
 
 class Commit(models.Model):
+    userprofile = models.ForeignKey('session.UserProfile',
+                                    null=False, related_name='commit')
     branch = models.ForeignKey('Branch',
                                 null=False, related_name='commit')
     meta_data = models.TextField(default='', max_length=200)
@@ -95,3 +97,11 @@ class Part(models.Model):
     def abc(self):
         return self.commit.meta_data + '\n' + self.meta_data + '\n' + self.notes
 
+
+class Star(models.Model):
+    userprofile = models.ForeignKey('session.UserProfile',
+                                    null=False, related_name='star')
+    repository = models.ForeignKey('Repository', null=False, related_name='star')
+
+    def __str__(self):
+        return 'Star: %s, %s' % (self.repository, self.userprofile)
