@@ -8,4 +8,10 @@ $(document).ready(function() {
         	window.location.href="/search/?keyword="+$(this).val();
     	}
  	});
+    MIDI.loadPlugin({
+        soundfontUrl: "/media/soundfont/",
+        onsuccess: function() {
+            player = MIDI.player;
+            player.timeWarp = 1;
+        }});
  });
