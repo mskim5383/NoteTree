@@ -58,7 +58,7 @@ class Commit(models.Model):
     title = models.CharField(default='', max_length=20)
     meter = models.CharField(default='4/4', max_length=10)
     key = models.CharField(default='C', max_length=5)
-    message = models.TextField(default='', blank=False, max_length=30)
+    message = models.CharField(default='', blank=False, max_length=30)
     created_time = models.DateTimeField(auto_now_add=True)
 
     class Meta:

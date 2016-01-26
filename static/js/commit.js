@@ -16,14 +16,18 @@ $(document).ready(function() {
 
    $("#part-create").click(function() {
        num_part += 1;
-       var text = '<div class="part-container" style="display: block;">\n';
+       var text = '<div class="part-container" style="display: block; margin-top:30px; margin-bottom:100px;">\n';
+       text += '<h5> Part Order </h5>\n';
        text += '<input class="form-control" id="part-order" name="part-order-' + num_part + '" type="number" value=0 />\n';
        text += '<input class="hidden" id="part-id" name="part-id-' + num_part + '" type="number" value=-' + num_part +' />\n';
+       text += '<h5> Clef </h5>\n';
        text += '<input class="form-control" id="part-clef" name="part-clef-' + num_part + '" type="text" value="treble" />\n';
+       text += '<h5> Part Name </h5>\n';
        text += '<input class="form-control" id="part-name" name="part-name-' + num_part + '" type="text" value="" />\n';
+       text += '<h5> Notes </h5>\n';
        text += '<textarea class="form-control" id="part-notes" name="part-notes-' + num_part + '"></textarea>\n';
        text += '<input class="hidden" id="deleted" name="part-deleted-' + num_part + '" type="number" value=0 />\n';
-       text += '<a href="#" class="btn btn-warning" id="part-delete">Delete</a>\n';
+       text += '<a class="starbutton darktext" href="#" id= "part-delete">Delete</a>\n';
        text += '</div>';
        $(".part-list-container").append(text);
        $("#part-count").attr("value", num_part);
