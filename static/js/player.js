@@ -257,7 +257,7 @@ var IDX;
 var OFFSET;
 function startAudio(currentTime, isPlaying, onsuccess) {
     if (!isPlaying) {
-        //player.isPlaying && stopAudio();
+        player.isPlaying && stopAudio();
         player.isPlaying = true;
         player.packets = player.replayer.getData();
         player.duration = getLength();
@@ -377,7 +377,7 @@ function stopAudio() {
         player.isPlaying = false;
         ///
         var ctx = getContext();
-        player.currentTime += (ctx.currentTime - startTime) * 1000;
+        player.currentTime += (ctx.currentTime - startTime) * 1000 - 500;
 
         /// stop the audio, and intervals
         while(packetQueue.length) {
@@ -395,16 +395,6 @@ function stopAudio() {
             }
         }
         
-        for (var sid in packetOn) {
-            var event = packetOn[sid];
-            onPacketListener({
-                channel: event.channel,
-                noteNumber: event.noteNumber,
-                status: event.status - 16,
-                subtype: 'noteOff',
-                type: 'channel'
-            });
-        }
     }
 };
 
