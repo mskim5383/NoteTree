@@ -15,7 +15,11 @@
 	  				<a href="#">
 	  					<span class="glyphicon glyphicon-upload" aria-hidden="true"></span> 
 	  					<span>{{ branch.commit.count }}</span>
+	  					{% if branch.commit.count > 1 %}
 	  					commits
+	  					{% else %}
+	  					commit
+	  					{% endif %}
 	  				</a>
 	  			</li>
 	  		</ul>
@@ -26,7 +30,11 @@
 	  				<a href="#">
 	  					<span class="glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
 	  					<span>{{ branch.repository.branch.count }}</span>
+	  					{% if branch.repository.branch.count > 1 %}
+	  					branches
+	  					{% else %}
 	  					branch
+	  					{% endif %}
 	  				</a>
 	  			</li>
 	  		</ul>
@@ -37,7 +45,11 @@
 	  				<a href="#">
 	  					<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
 	  					<span>{{ branch.repository.contributor.count }}</span>
+	  					{% if branch.repository.contributor.count > 1 %}
 	  					contributors
+	  					{% else %}
+	  					contributor
+	  					{% endif %}
 	  				</a>
 	  			</li>
 	  		</ul>
