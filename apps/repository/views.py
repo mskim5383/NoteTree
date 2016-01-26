@@ -128,7 +128,8 @@ def commit(request, username, repo_name, branch_name, commit_id):
             for i in range(part_count):
                 try:
                     part_order = int(request.POST.get("part-order-" + str(i + 1)))
-                    part_meta = request.POST.get("part-meta-" + str(i + 1), "")
+                    part_clef = request.POST.get("part-clef-" + str(i + 1), "treble")
+                    part_name = request.POST.get("part-name-" + str(i + 1), "")
                     part_notes = request.POST.get("part-notes-" + str(i + 1), "")
                     part_deleted = int(request.POST.get("part-deleted-" + str(i + 1)))
                 except:
@@ -137,13 +138,14 @@ def commit(request, username, repo_name, branch_name, commit_id):
                     part = Part()
                     part.commit = commit
                     part.order = part_order
-                    part.meta_data = part_meta
+                    part.clef = part_clef
+                    part.name = part_name
                     part.notes = part_notes
                     part.save()
 
-            return redirect('../' + str(commit.id))
+            return redirect('../')
     else:
-        commit_form = CommitForm(initial={'meta_data': commit.meta_data})
+        commit_form = CommitForm(initial={'title': commit.title, 'meter': commit.meter, 'key': commit.key})
     return render(request, 'repository/commit.html',
             {'commit': commit, 'commit_form': commit_form})
 

@@ -19,7 +19,9 @@
             {% for part in commit.part.all %}
             <div class="part-container" style="display: block;">
                 <input class="form-control" id="part-order" name="part-order-{{ forloop.counter }}" type="number" value={{ part.order }} />
-                <textarea class="form-control" id="part-meta" name="part-meta-{{ forloop.counter }}" type="text">{{ part.meta_data}}</textarea>
+                <input class="hidden" id="part-id" name="part-id-{{ forloop.counter }}" type="number" value={{ part.id }} />
+                <input class="form-control" id="part-clef" name="part-clef-{{ forloop.counter }}" type="text" value={{ part.clef }} />
+                <input class="form-control" id="part-name" name="part-name-{{ forloop.counter }}" type="text" value={{ part.name }} />
                 <textarea class="form-control" id="part-notes" name="part-notes-{{ forloop.counter }}" type="text">{{ part.notes }}</textarea>
                 <input class="hidden" id="deleted" name="part-deleted-{{ forloop.counter }}" type="number" value=0 />
                 <a href="#" class="btn btn-warning" id="part-delete">Delete</a>

@@ -5,11 +5,12 @@ $(document).ready(function() {
    RefreshABCListener();
 
   var part_list = $(".part-container").sort(ComparePart);
-  var text = $("#id_meta_data")[0].value + "\n";
+  var text = "X: 1\nT: " + $("#id_title").val() + "\nM: " + $("#id_meter").val() + "\nK: " + $("#id_key").val() + "\n";
   var text2 = "";
   for (var i = 0; i < part_list.length; i++) {
-     text += $(part_list[i]).children("#part-meta")[0].value + "\n";
-     text2 += $(part_list[i]).children("#part-notes")[0].value + "\n";
+     var part = $(part_list[i]);
+     text += "V: " + part.children("#part-id").val() + " clef=" + part.children("#part-clef").val() + ' name= "' + part.children("#part-name").val() + '"\n';
+     text2 += "[V: " + part.children("#part-id").val() + "]" + $(part_list[i]).children("#part-notes").val() + "\n";
   };
   $("textarea#abc").text(text + text2);
 
@@ -17,7 +18,9 @@ $(document).ready(function() {
        num_part += 1;
        var text = '<div class="part-container" style="display: block;">\n';
        text += '<input class="form-control" id="part-order" name="part-order-' + num_part + '" type="number" value=0 />\n';
-       text += '<textarea class="form-control" id="part-meta" name="part-meta-' + num_part + '"></textarea>\n';
+       text += '<input class="hidden" id="part-id" name="part-id-' + num_part + '" type="number" value=-' + num_part +' />\n';
+       text += '<input class="form-control" id="part-clef" name="part-clef-' + num_part + '" type="text" value="treble" />\n';
+       text += '<input class="form-control" id="part-name" name="part-name-' + num_part + '" type="text" value="" />\n';
        text += '<textarea class="form-control" id="part-notes" name="part-notes-' + num_part + '"></textarea>\n';
        text += '<input class="hidden" id="deleted" name="part-deleted-' + num_part + '" type="number" value=0 />\n';
        text += '<a href="#" class="btn btn-warning" id="part-delete">Delete</a>\n';
@@ -41,14 +44,15 @@ function RefreshDeleteListener() {
 };
 
 function RefreshABCListener() {
-  $("#part-order, #part-meta, #part-notes, #id_meta_data").off();
-  $("#part-order, #part-meta, #part-notes, #id_meta_data, #part-delete").on("change keyup paste click", function() {
+  $("#part-order, #part-clef, #part-name, #part-notes, #id_title, #id_meter, #id_key").off();
+  $("#part-order, #part-clef, #part-name, #part-notes, #id_title, #id_meter, #id_key, #part-delete").on("change keyup paste click", function() {
       var part_list = $(".part-container").sort(ComparePart);
-      var text = $("#id_meta_data").val() + "\n";
+      var text = "X: 1\nT: " + $("#id_title").val() + "\nM: " + $("#id_meter").val() + "\nK: " + $("#id_key").val() + "\n";
       var text2 = "";
       for (var i = 0; i < part_list.length; i++) {
-         text += $(part_list[i]).children("#part-meta").val() + "\n";
-         text2 += $(part_list[i]).children("#part-notes").val() + "\n";
+         var part = $(part_list[i]);
+         text += "V: " + part.children("#part-id").val() + " clef=" + part.children("#part-clef").val() + ' name="' + part.children("#part-name").val() + '"\n';
+         text2 += "[V: " + part.children("#part-id").val() + "]" + $(part_list[i]).children("#part-notes").val() + "\n";
       };
       $("textarea#abc").text(text + text2);
   });

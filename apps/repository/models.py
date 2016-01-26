@@ -50,7 +50,9 @@ class Commit(models.Model):
                                     null=False, related_name='commit')
     branch = models.ForeignKey('Branch',
                                 null=False, related_name='commit')
-    meta_data = models.TextField(default='', max_length=200)
+    title = models.CharField(default='', max_length=20)
+    meter = models.CharField(default='4/4', max_length=10)
+    key = models.CharField(default='C', max_length=5)
     message = models.TextField(default='', blank=False, max_length=30)
     created_time = models.DateTimeField(auto_now_add=True)
 
@@ -63,7 +65,10 @@ class Commit(models.Model):
     def clone(self):
         commit = Commit()
         commit.branch = self.branch
-        commit.meta_data = self.meta_data
+        commit.title = self.title
+        commit.meter = self.meter
+        commit.key = self.key
+        commit.message = self.message
         commit.save()
         for part in self.part.all():
             p = part.clone()
@@ -71,31 +76,45 @@ class Commit(models.Model):
             part.save()
         return commit
 
+    def get_meta(self):
+        return 'X: 1\nT: %s\nM: %s\nK: %s\n' % (self.title, self.meter, self.key)
+
     def abc(self):
-        ret = self.meta_data + '\n'
+        ret = self.get_meta()
         ret2 = ""
         for part in self.part.order_by('order'):
-            ret += part.meta_data + '\n'
-            ret2 += part.notes + '\n'
+            ret += part.get_meta()
+            ret2 += '[V: %d]%s\n' % (part.id, part.notes)
         return ret + ret2
 
 
 class Part(models.Model):
+    CLEF_CHOICES = (
+            ('treble', 'treble'),
+            ('alto', 'alto'),
+            ('tenor', 'tenor'),
+            ('bass', 'bass'))
+
     commit = models.ForeignKey('Commit',
                                 null=False, related_name='part')
     order = models.IntegerField(default=-1)
-    meta_data = models.TextField(default='', max_length=200)
+    clef = models.CharField(default='treble', max_length=10, choices=CLEF_CHOICES)
+    name = models.CharField(default='', max_length=20)
     notes = models.TextField(default='', max_length=10000)
 
     def clone(self):
         part = Part()
         part.order = self.order
-        part.meta_data = self.meta_data
+        part.clef = self.clef
+        part.name = self.name
         part.notes = self.notes
         return part
 
+    def get_meta(self):
+        return 'V: %d clef=%s name="%s"\n' % (self.id, self.clef, self.name)
+
     def abc(self):
-        return self.commit.meta_data + '\n' + self.meta_data + '\n' + self.notes
+        return '%s%s[V: %d]%s' % (self.commit.get_meta(), self.get_meta(), self.id, self.notes)
 
 
 class Star(models.Model):
