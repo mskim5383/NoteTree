@@ -2,7 +2,8 @@
 {% block content %}
 <div class="container">
     {{ error }}
-    <form method="POST">
+    <form method="POST" style="width:75%; margin:auto; margin-top:50px; margin-bottom:50px">
+        <h3 style="margin-bottom:50px;">Login</h3>
         {% csrf_token %}
         <input type="hidden" name="next" value="{{ next }}">
         <div class="form-group">
@@ -14,6 +15,7 @@
             <input type="password" class="form-control" name="password" placeholder="Password">
         </div>
         <button type="submit" class="btn btn-default">Login</button>
+        <a href="/session/register" style="margin-left:20px;"> Not a member yet? Sign up for NoteTree!</a>
     </form>
 </div>
 {% endblock %}

@@ -2,7 +2,8 @@
 {% load bootstrap %}
 {% block content %}
 <div class="container">
-    <form action="./" method="POST">
+    <form action="./" method="POST" style="width:75%; margin:auto; margin-top:50px; margin-bottom:50px">
+    	<h3 style="margin-bottom:50px;">Create New Branch</h3>
         {% csrf_token %}
         {{ branch_form|bootstrap }}
         <button type="submit" class="btn btn-default">Create</button>
