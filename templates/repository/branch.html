@@ -11,7 +11,11 @@
 
     <div class="starbutton">
         <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+        {% if star %}
+        <a class="star" id="star">Unstar</a>
+        {% else %}
         <a class="unstar" id="star">Star</a>
+        {% endif %}
     </div>
     <div class="starbutton">
         <a class="darktext" href="../create_branch">Add Branch</a>

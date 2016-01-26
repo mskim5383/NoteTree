@@ -29,6 +29,7 @@ class RepositoryForm(ModelForm):
         commit = Commit()
         commit.branch = master_branch
         commit.meta_data = "X: 1\nT: %s\nL:1/4\nK:G\n" % self.instance.name
+        commit.userprofile = self.userprofile
         commit.save()
         contributor = Contributor()
         contributor.userprofile = self.userprofile

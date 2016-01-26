@@ -14,7 +14,7 @@
 	    <h3 class = "repo-list-name" style="display:inline-block; margin-top:0px;"><a href="/{{ repository }}"> {{ repository }} </a></h3>
 	    <div class="repo-list-stats" style="display:inline-block; float:right;">
 	    	<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-	    	<span> 137 </span>
+            <span> {{ repository.star.all.count }} </span>
 	    </div>
 	    <p style="margin-top:15px;"> This is the best marvellous repository I've ever seen. </p>
         <p style="margin-top:15px; color:#888;"> Updated on <time class="timeago" datetime="{{ repository.updated_time|date:"c" }}"></time></p>

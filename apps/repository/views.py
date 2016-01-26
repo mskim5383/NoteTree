@@ -22,8 +22,9 @@ def userprofile(request, username):
 def repository(request, username, repo_name):
     userprofile, repository = validity_check(username, repo_name)
     master = repository.branch.get(name='master')
+    star = repository.get_star(userprofile)
     return render(request, 'repository/repository.html',
-                    {'repository': repository, 'branch': master})
+            {'repository': repository, 'branch': master, 'star': star})
 
 def create_repository(request, username):
     if not request.user.is_authenticated():
@@ -82,8 +83,9 @@ def star(request, username, repo_name):
 
 def branch(request, username, repo_name, branch_name):
     userprofile, repository, branch = validity_check(username, repo_name, branch_name)
+    star = repository.get_star(userprofile)
     return render(request, 'repository/branch_main.html',
-                    {'branch': branch})
+            {'branch': branch, 'star': star})
 
 def create_branch(request, username, repo_name):
     if not request.user.is_authenticated():
@@ -103,8 +105,9 @@ def create_branch(request, username, repo_name):
 
 def list_commit(request, username, repo_name, branch_name):
     userprofile, repository, branch = validity_check(username, repo_name, branch_name)
+    star = repository.get_star(userprofile)
     return render(request, 'repository/list_commit.html',
-                    {'branch': branch})
+            {'branch': branch, 'star': star})
 
 
 def commit(request, username, repo_name, branch_name, commit_id):

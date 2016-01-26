@@ -21,6 +21,11 @@ class Repository(models.Model):
             return True
         return False
 
+    def get_star(self, userprofile):
+        if self.star.filter(userprofile=userprofile).exists():
+            return True
+        return False
+
     def updated_time(self):
         commit = Commit.objects.filter(branch__repository=self).reverse()[0]
         return commit.created_time
