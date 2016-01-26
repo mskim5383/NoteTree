@@ -2,11 +2,12 @@
 {% block branch_content %}
 <div class="container sheet">
 		<ul class="nav nav-tabs">
-  			<li role="presentation" class="active"><a href="#">Home</a></li>
-  			<li role="presentation"><a href="#">Profile</a></li>
-  			<li role="presentation"><a href="#">Messages</a></li>
+            <li role="presentation" class="active"><a href="#" class="score-select" value='{{ branch.commit.reverse.0.abc }}'>Score</a></li>
+            {% for part in branch.commit.reverse.0.part.all %}
+            <li role="presentation"><a href="#" class="part-select" value='{{ part.abc }}'>{{ part }}</a></li>
+            {% endfor %}
 		</ul>
-		<textarea id="abc" style="display: None;">{{ branch.commit.reverse.0.abc }}</textarea>
+		<textarea id="abc" style="display: None;"></textarea>
 		<div id="warnings"></div>
 		<div id="paper0"></div>
 </div>

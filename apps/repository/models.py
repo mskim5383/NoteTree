@@ -14,7 +14,7 @@ class Repository(models.Model):
 
 
     def __str__(self):
-        return 'Repository: %s/%s' % (self.userprofile.user.username, self.name)
+        return '%s/%s' % (self.userprofile.user.username, self.name)
 
     def is_valid(self, userprofile):
         if self.contributor.filter(userprofile=userprofile).exists():
@@ -85,4 +85,7 @@ class Part(models.Model):
         part.meta_data = self.meta_data
         part.notes = self.notes
         return part
+
+    def abc(self):
+        return self.commit.meta_data + '\n' + self.meta_data + '\n' + self.notes
 
