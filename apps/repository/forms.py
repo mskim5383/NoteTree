@@ -1,7 +1,11 @@
+from __future__ import absolute_import
+
 from django.contrib.auth.models import User
 from django.forms import ModelForm
+from django import forms
 
-from models import Repository, Branch, Commit, Part
+from apps.repository.models import Repository, Branch, Commit, Part, Contributor
+from apps.session.models import UserProfile
 
 
 
@@ -77,3 +81,30 @@ class CommitForm(ModelForm):
         self.instance.branch = self.branch
         super(CommitForm, self).save(*args, **kwargs)
         return self.instance
+
+
+class ContributorForm(ModelForm):
+    username = forms.CharField(max_length=20)
+
+    class Meta:
+        model = Contributor
+        exclude = ['repository', 'userprofile']
+
+
+    def save(self, *args, **kwargs):
+        self.instance.repository = kwargs.pop('repository', None)
+        super(ContributorForm, self).save(*args, **kwargs)
+        return self.instance
+
+    def clean(self):
+        cleaned_data = super(ModelForm, self).clean()
+        if 'username' in cleaned_data:
+            username = cleaned_data['username']
+            if UserProfile.objects.filter(user__username=username).exists():
+                self.instance.userprofile = UserProfile.objects.get(user__username=username)
+            else:
+                self.add_error('username', 'not exists')
+        return cleaned_data
+
+
+

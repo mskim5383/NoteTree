@@ -17,6 +17,15 @@ class Repository(models.Model):
         return 'Repository: %s/%s' % (self.userprofile.user.username, self.name)
 
 
+class Contributor(models.Model):
+    userprofile = models.ForeignKey('session.UserProfile',
+                                    null=False, related_name='contributor')
+    repository = models.ForeignKey('Repository', null=False, related_name='contributor')
+
+    def __str__(self):
+        return 'Contributor: %s, %s' % (self.repository, self.userprofile)
+
+
 class Branch(models.Model):
     name = models.CharField(max_length=20, null=False, default='')
     repository = models.ForeignKey('Repository',

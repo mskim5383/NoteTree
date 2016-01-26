@@ -5,7 +5,7 @@ from django.http import Http404
 
 from apps.session.models import UserProfile
 from apps.repository.models import Repository, Part
-from apps.repository.forms import RepositoryForm, BranchForm, CommitForm
+from apps.repository.forms import RepositoryForm, BranchForm, CommitForm, ContributorForm
 
 # Create your views here.
 
@@ -23,6 +23,8 @@ def repository(request, username, repo_name):
                     {'repository': repository})
 
 def create_repository(request, username):
+    if not request.user.is_authenticated():
+        raise Http404
     userprofile = validity_check(username)
     if userprofile != request.user.userprofile:
         raise Http404
@@ -36,12 +38,32 @@ def create_repository(request, username):
     return render(request, 'repository/create_repository.html',
                     {'repository_form': repository_form})
 
+def manage_repository(request, username, repo_name):
+    if not request.user.is_authenticated():
+        raise Http404
+    userprofile, repository = validity_check(username, repo_name)
+    if userprofile != request.user.userprofile:
+        raise Http404
+    if request.method == 'POST':
+        print request.POST.get('userprofile', '')
+        contributor_form = ContributorForm(request.POST)
+        if contributor_form.is_valid():
+            contributor = contributor_form.save(repository=repository)
+            return redirect('./')
+    else:
+        contributor_form = ContributorForm()
+    return render(request, 'repository/manage_repository.html',
+            {'repository': repository, 'contributor_form': contributor_form})
+
+
 def branch(request, username, repo_name, branch_name):
     userprofile, repository, branch = validity_check(username, repo_name, branch_name)
     return render(request, 'repository/branch.html',
                     {'branch': branch})
 
 def create_branch(request, username, repo_name):
+    if not request.user.is_authenticated():
+        raise Http404
     userprofile, repository = validity_check(username, repo_name)
     if userprofile != request.user.userprofile:
         raise Http404
@@ -62,6 +84,8 @@ def commit(request, username, repo_name, branch_name, commit_id):
         raise Http404
     userprofile, repository, branch, commit = validity_check(username, repo_name, branch_name, commit_id)
     if request.method == 'POST':
+        if not request.user.is_authenticated():
+            raise Http404
         commit_form = CommitForm(request.POST, branch=branch)
         if commit_form.is_valid():
             commit = commit_form.save()
