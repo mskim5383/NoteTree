@@ -83,6 +83,12 @@ def create_branch(request, username, repo_name):
     return render(request, 'repository/create_branch.html',
                     {'branch_form': branch_form})
 
+def list_commit(request, username, repo_name, branch_name):
+    userprofile, repository, branch = validity_check(username, repo_name, branch_name)
+    return render(request, 'repository/list_commit.html',
+                    {'branch': branch})
+
+
 def commit(request, username, repo_name, branch_name, commit_id):
     try:
         commit_id = int(commit_id)
