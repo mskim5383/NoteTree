@@ -32,6 +32,8 @@ class Commit(models.Model):
                                 null=False, related_name='commit')
     meta_data = models.TextField(default='', max_length=200)
 
+    class Meta:
+        ordering = ['pk']
 
     def __str__(self):
         return 'Commit: %s/%s/%s/%d' % (self.branch.repository.userprofile.user.username, self.branch.repository.name, self.branch.name, self.id)
