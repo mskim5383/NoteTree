@@ -99,16 +99,18 @@
         <ul class="nav nav-tabs">
             <li role="presentation" class="active"><a href="#" class="score-select" value='{{ branch.commit.reverse.0.abc }}'>Score</a></li>
             {% for part in branch.commit.reverse.0.part.all %}
-            <li role="presentation"><a href="#" class="part-select" value='{{ part.abc }}'>{{ part }}</a></li>
+            <li role="presentation"><a href="#" class="part-select" value='{{ part.abc }}'>{{ part.name }}</a></li>
             {% endfor %}
             <a class="addcommit" href="./master/{{ branch.commit.reverse.0.id }}">
                 Add Commit
             </a>
+            <a class="addcommit" id="midi-play">Play</a>
         </ul>
     </div>
         <textarea id="abc" style="display: None;"></textarea>
         <div id="warnings"></div>
         <div id="paper0"></div>
+        <div id="midi" style="display: None;"></div>
 </div>
 
 {% endblock %}

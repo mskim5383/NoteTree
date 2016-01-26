@@ -15,8 +15,9 @@ import json
 
 def userprofile(request, username):
     userprofile = validity_check(username)
+    contributor = userprofile.contributor.all()
     return render(request, 'repository/userprofile.html',
-                    {'userprofile': userprofile})
+            {'userprofile': userprofile, 'contributor': contributor})
 
 
 def repository(request, username, repo_name):

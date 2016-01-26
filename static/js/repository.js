@@ -22,11 +22,16 @@ $(document).ready(function() {
         });
     });
     $("#abc").val($(".score-select").attr("value"));
-        abc_editor = new ABCJS.Editor("abc", {paper_id: "paper0", warnings_is: "warnings"});
+   abc_editor = new ABCJS.Editor("abc", {paper_id: "paper0", midi_id: "midi", warnings_is: "warnings"});
    
    $(".part-select, .score-select").on("click", function() {
        $("#abc").val($(this).attr("value"));
        $(this).parent().parent().children(".active").attr("class", "");
        $(this).parent().attr("class", "active");
+   });
+   $("#midi-play").on("click", function() {
+       var midi = $("#midi").children("a").attr("href");
+       MIDI.player.loadFile(midi, player.start);
+       MIDI.player.start();
    });
 });

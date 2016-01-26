@@ -48,8 +48,8 @@
 	  				<div class="panel-heading panel-heading-custom">Repositories contributed to
 	  				</div>
 	  						<ul class="list-group">
-	  						{% for repo in userprofile.repository.all|slice:":5"%}
-	  							<li class="list-group-item" id = "pl"{{ forloop.counter }}>{{ repo.name }}</li>
+	  						{% for cont in contributor|slice:":5"%}
+                            <a class="list-group-item" id = "pl"{{ forloop.counter }} href="./{{ cont.repository.name }}">{{ cont.repository.name }}</a>
 	      					{% endfor %}
 	      					</ul>
 				</div>

@@ -26,6 +26,9 @@ class Repository(models.Model):
             return True
         return False
 
+    def num_star(self):
+        return self.star.count()
+
     def updated_time(self):
         commit = Commit.objects.filter(branch__repository=self).reverse()[0]
         return commit.created_time

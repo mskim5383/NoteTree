@@ -37,6 +37,7 @@
 .addcommit{
 	background-color:#fff;
     color:#000;
+    margin-left:10px;
     padding:7px;
     border: 1px solid #ccc;
     border-radius: 5px;
