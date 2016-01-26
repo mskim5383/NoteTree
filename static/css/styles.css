@@ -217,3 +217,8 @@ ul.social-buttons li a:hover,ul.social-buttons li a:focus,ul.social-buttons li a
   background-color:#fed136
 }
 
+hr { 
+  border-top:1px solid #9C9C9C; 
+  border-bottom:1px solid #F6F6F6;
+}
+

@@ -2,16 +2,75 @@
 {% block content %}
 
 {% if user.is_authenticated %}
+<div class="container-fluid header">
+	<div class="row">
+		<div class="col-xs-1">
+		</div>
+		<div class="col-xs-10">
+			<div class="ogeul">
+				<h1 class="h1ogeul">Share Your music worldwide</h1>
+			</div>
+		</div>
+		<div class="col-xs-1">
+		</div>
+	</div>
+</div>
+
+<div class="container" style="height:50px;">
+</div>
+
+<div class="container rank_star">
+	<h2 style-"text_align:center;">Star Ranking of this Month</h2>
+	<hr>
+	</hr>
+	<div class="row">
+		<div class="col-xs-2" style="font-weight:bold; font-size:16px;">
+			Rank
+		</div>
+		<div class="col-xs-5" style="font-weight:bold; font-size:16px;">
+			Repository
+		</div>
+		<div class="col-xs-5" style="font-weight:bold; font-size:16px;">
+			Stars
+		</div>
+	</div>
+	<hr>
+	</hr>
+	<div class="row">
+		<div class="col-xs-2">
+			1
+		</div>
+		<div class="col-xs-5">
+			/kanon/music
+		</div>
+		<div class="col-xs-5">
+			137
+		</div>
+	</div>
+	<hr>
+	</hr>
+
+	<a href="/{{ user.username }}/create_repository/" class="btn btn-dark btn-lg" style="margin-top:30px; margin-bottom:60px; background-color:#000;">Make your own repository</a>
+</div>
 {% else %}
-        <header id="top" class="header0">
-            <div class="text-vertical-center">
-                    <h1> NOTETREE </h1>
-                    <h3> Write your music, anywhere, anytime.</h3>
-                    <a href="/session/login/" class="btn btn-dark btn-lg">Start NoteTree</a>
-            </div>
-        </header>
+<header id="top" class="header0">
+    <div class="text-vertical-center">
+            <h1> NOTETREE </h1>
+            <h3> Write your music, anywhere, anytime.</h3>
+            <a href="/session/login/" class="btn btn-dark btn-lg">Start NoteTree</a>
+    </div>
+</header>
 {% endif %}
+{% endblock %}
 {% block css %}
 <link href="media/css/stylish-portfolio.css" rel="stylesheet">
-{% endblock %}
+<style>
+.container{
+  width:1000px;
+  text-align: center;
+}
+hr{
+	width:100%;
+}
+</style>
 {% endblock %}
