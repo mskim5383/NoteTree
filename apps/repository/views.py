@@ -45,10 +45,9 @@ def manage_repository(request, username, repo_name):
     if userprofile != request.user.userprofile:
         raise Http404
     if request.method == 'POST':
-        print request.POST.get('userprofile', '')
-        contributor_form = ContributorForm(request.POST)
+        contributor_form = ContributorForm(request.POST, repository=repository)
         if contributor_form.is_valid():
-            contributor = contributor_form.save(repository=repository)
+            contributor = contributor_form.save()
             return redirect('./')
     else:
         contributor_form = ContributorForm()

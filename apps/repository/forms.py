@@ -95,8 +95,12 @@ class ContributorForm(ModelForm):
         exclude = ['repository', 'userprofile']
 
 
+    def __init__(self, *args, **kwargs):
+        self.repository = kwargs.pop('repository', None)
+        super(ContributorForm, self).__init__(*args, **kwargs)
+
     def save(self, *args, **kwargs):
-        self.instance.repository = kwargs.pop('repository', None)
+        self.instance.repository = self.repository
         super(ContributorForm, self).save(*args, **kwargs)
         return self.instance
 
@@ -106,6 +110,8 @@ class ContributorForm(ModelForm):
             username = cleaned_data['username']
             if UserProfile.objects.filter(user__username=username).exists():
                 self.instance.userprofile = UserProfile.objects.get(user__username=username)
+                if self.repository.is_valid(self.instance.userprofile):
+                    self.add_error('username', 'aleary added')
             else:
                 self.add_error('username', 'not exists')
         return cleaned_data
