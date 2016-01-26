@@ -1,13 +1,27 @@
 {% extends "base.html" %}
 {% block content %}
+<div class="container" style="height:50px;">
+</div>
 <div class="container">
     <div>
-        "{{ keyword }}"
+    	<h2 style="margin-bottom:40px;"> Search Results for keyword: {{ keyword }} </h2>
+    	<h4> We've found {{ repository_list|length }} results.</h4>
     </div>
     {% for repository in repository_list %}
+    <hr>
+    </hr>
     <div>
-        {{ repository }}
+	    <h3 class = "repo-list-name" style="display:inline-block; margin-top:0px;"><a href="/{{ repository }}"> {{ repository }} </a></h3>
+	    <div class="repo-list-stats" style="display:inline-block; float:right;">
+	    	<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+	    	<span> 137 </span>
+	    </div>
+	    <p style="margin-top:15px;"> This is the best marvellous repository I've ever seen. </p>
+	    <p style="margin-top:15px; color:#888;"> Updated on 31 August 2015</p>
     </div>
     {% endfor %}
 </div>
+{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="/media/css/search.css">
 {% endblock %}
