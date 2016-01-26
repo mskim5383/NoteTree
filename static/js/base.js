@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	console.log("ASDAS");
+    $("time.timeago").timeago();
 	$('body').on('keypress', '#s', function(e){
 		console.log("AHAH");
     	var p = e.which;

@@ -17,7 +17,7 @@
 	    	<span> 137 </span>
 	    </div>
 	    <p style="margin-top:15px;"> This is the best marvellous repository I've ever seen. </p>
-	    <p style="margin-top:15px; color:#888;"> Updated on 31 August 2015</p>
+        <p style="margin-top:15px; color:#888;"> Updated on <time class="timeago" datetime="{{ repository.updated_time|date:"c" }}"></time></p>
     </div>
     {% endfor %}
 </div>

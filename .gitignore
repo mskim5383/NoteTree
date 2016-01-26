@@ -69,5 +69,5 @@ db.*
 
 # Mac OS Env
 .DS_Store
-.jpg
-.png
+*.jpg
+*.png

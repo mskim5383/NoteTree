@@ -21,6 +21,10 @@ class Repository(models.Model):
             return True
         return False
 
+    def updated_time(self):
+        commit = Commit.objects.filter(branch__repository=self).reverse()[0]
+        return commit.created_time
+
 
 class Contributor(models.Model):
     userprofile = models.ForeignKey('session.UserProfile',
@@ -45,6 +49,7 @@ class Commit(models.Model):
     branch = models.ForeignKey('Branch',
                                 null=False, related_name='commit')
     meta_data = models.TextField(default='', max_length=200)
+    created_time = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ['pk']
