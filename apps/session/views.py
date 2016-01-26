@@ -1,10 +1,19 @@
+from __future__ import absolute_import
+
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.core.files import File
 
-from models import UserProfile
-from forms import UserForm, UserProfileForm
+import StringIO
+from PIL import Image, ImageOps
+import hashlib
+import os
+
+from apps.session.models import UserProfile
+from apps.session.forms import UserForm, UserProfileForm
+from NoteTree.settings import UPLOAD_DIR
 
 
 def user_login(request):
@@ -136,4 +145,4 @@ def _handle_uploaded_image(i, x, y):
     imagefile = open(os.path.join(UPLOAD_DIR,filename), 'r')
     content = File(imagefile)
 
-    return (filename, content)
+    return content

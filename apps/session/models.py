@@ -15,7 +15,7 @@ class UserProfile(models.Model):
     name = models.CharField(default='', max_length=20)
     thumbnail = models.ImageField(null=True, blank=True, upload_to=UPLOAD_DIR)
 
-    def get_thumbnail_url(self):
+    def thumbnail_url(self):
         if self.thumbnail:
             return '/upload/'+self.thumbnail.url.split('/')[-1]
         return '/media/img/default.jpg'
