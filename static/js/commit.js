@@ -20,7 +20,7 @@ $(document).ready(function() {
        text += '<textarea class="form-control" id="part-meta" name="part-meta-' + num_part + '"></textarea>\n';
        text += '<textarea class="form-control" id="part-notes" name="part-notes-' + num_part + '"></textarea>\n';
        text += '<input class="hidden" id="deleted" name="part-deleted-' + num_part + '" type="number" value=0 />\n';
-       text += '<a href="javascript:void(0);" class="btn btn-warning" id="part-delete">Delete</a>\n';
+       text += '<a href="#" class="btn btn-warning" id="part-delete">Delete</a>\n';
        text += '</div>';
        $(".part-list-container").append(text);
        $("#part-count").attr("value", num_part);

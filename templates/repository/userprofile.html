@@ -7,24 +7,24 @@
     </div>
     <div class="row">
     	<div class="col-sm-3">
-    		<a href="#" class="thumbnail">
+    		<a class="thumbnail">
                 <img src="{{ userprofile.thumbnail_url }}" class="img-responsive" alt="user_profile">
     		</a>
     		<h1 id="username">
-				<script type="text/javascript">
-					document.write(location.pathname.split("/")[1]);
-				</script>
+    			{{ userprofile.user.username }}
 			</h1>
 		<hr>
 		</hr>
 		<div class="user_stats">
 			<h4 class="call">
 				<span class='bigger'>
-					<script type="text/javascript">
-						document.write({{ userprofile.repository.all|length }});
-					</script>
-				</span> 
+					{{ userprofile.repository.all|length }}
+				</span>
+				{% if userprofile.repository.all|length > 1 %}
 				repositories
+				{% else %}
+				repository
+				{% endif %} 
 			</h4>
 		</div>
 

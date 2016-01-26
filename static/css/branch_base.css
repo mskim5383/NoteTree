@@ -50,3 +50,8 @@
 	color:#999;
 	text-decoration:none;
 }
+
+.nav>li.language-nonactive>a:hover, .nav>li.language-nonactive>a:focus {
+  background-color: transparent;
+  color:#000;
+}

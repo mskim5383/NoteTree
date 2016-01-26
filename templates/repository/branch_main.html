@@ -7,7 +7,7 @@
             {% for part in branch.commit.reverse.0.part.all %}
             <li role="presentation"><a href="#" class="part-select" value='{{ part.abc }}'>{{ part }}</a></li>
             {% endfor %}
-            <a class="addcommit" href="../master/{{ branch.commit.reverse.0.id }}">
+            <a class="addcommit" href="./{{ branch.commit.reverse.0.id }}">
 				Add Commit
 			</a>
 		</ul>

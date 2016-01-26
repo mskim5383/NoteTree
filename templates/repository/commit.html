@@ -22,11 +22,11 @@
                 <textarea class="form-control" id="part-meta" name="part-meta-{{ forloop.counter }}" type="text">{{ part.meta_data}}</textarea>
                 <textarea class="form-control" id="part-notes" name="part-notes-{{ forloop.counter }}" type="text">{{ part.notes }}</textarea>
                 <input class="hidden" id="deleted" name="part-deleted-{{ forloop.counter }}" type="number" value=0 />
-                <a href="javascript:void(0);" class="btn btn-warning" id="part-delete">Delete</a>
+                <a href="#" class="btn btn-warning" id="part-delete">Delete</a>
             </div>
             {% endfor %}
         </div>
-        <a href="javascipt:void(0);" class="btn btn-safe" id="part-create">Create part</a>
+        <a href="#" class="btn btn-safe" id="part-create">Create part</a>
         <button type="submit" class="btn btn-default">Create</button>
     </form>
 </div>
