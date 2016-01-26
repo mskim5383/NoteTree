@@ -49,7 +49,7 @@ class Commit(models.Model):
     branch = models.ForeignKey('Branch',
                                 null=False, related_name='commit')
     meta_data = models.TextField(default='', max_length=200)
-    message = models.TextField(default='', max_length=30)
+    message = models.TextField(default='', blank=False, max_length=30)
     created_time = models.DateTimeField(auto_now_add=True)
 
     class Meta:
