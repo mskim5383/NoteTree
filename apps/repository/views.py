@@ -1,11 +1,13 @@
 from __future__ import absolute_import
 
 from django.shortcuts import render, redirect
-from django.http import Http404
+from django.http import HttpResponse, Http404
 
 from apps.session.models import UserProfile
 from apps.repository.models import Repository, Part, Star
 from apps.repository.forms import RepositoryForm, BranchForm, CommitForm, ContributorForm
+
+import json
 
 # Create your views here.
 
@@ -62,9 +64,19 @@ def search_repository(request):
 
 def star(request, username, repo_name):
     result = {'status': 'bad'}
+    userprofile, repository = validity_check(username, repo_name)
     if request.method == 'POST':
-        pass
-    return
+        if Star.objects.filter(userprofile=request.user.userprofile, repository=repository).exists():
+            star = Star.objects.get(userprofile=request.user.userprofile, repository=repository)
+            star.delete()
+            result = {'status': 'unstar'}
+        else:
+            star = Star()
+            star.userprofile = request.user.userprofile
+            star.repository = repository
+            star.save()
+            result = {'status': 'star'}
+    return HttpResponse(json.dumps(result), content_type="application/json")
 
 
 def branch(request, username, repo_name, branch_name):

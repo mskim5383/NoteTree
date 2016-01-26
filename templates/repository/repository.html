@@ -1,12 +1,17 @@
 {% extends "base.html" %}
+{% block js %}
+<script src="/media/js/repository.js" type="text/javascript"></script>
+{% endblock %}
 {% block content %}
 <div class="container">
+    {% csrf_token %}
     <div class="username">
         {{ repository.userprofile }}
     </div>
     <div class="repository-name">
         {{ repository }}
     </div>
+    <button class="unstar" id="star">STAR</button>
     {% for branch in repository.branch.all %}
     <div class="branch">
         {{ branch }}
