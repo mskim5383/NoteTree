@@ -28,6 +28,7 @@ class RepositoryForm(ModelForm):
         master_branch.save()
         commit = Commit()
         commit.branch = master_branch
+        commit.message = 'Initial Commit'
         commit.meta_data = "X: 1\nT: %s\nL:1/4\nK:G\n" % self.instance.name
         commit.userprofile = self.userprofile
         commit.save()
@@ -56,11 +57,13 @@ class BranchForm(ModelForm):
         super(BranchForm, self).__init__(*args, **kwargs)
 
     def save(self, *args, **kwargs):
+        userprofile = kwargs.pop('userprofile', None)
         self.instance.repository = self.repository
         super(BranchForm, self).save(*args, **kwargs)
         master_branch = self.repository.branch.get(name='master')
-        head_commit = master_branch.commit.last().clone()
+        head_commit = master_branch.commit.last().clone(userprofile)
         head_commit.branch = self.instance
+        head_commit.userprofile = userprofile
         head_commit.save()
         return self.instance
 

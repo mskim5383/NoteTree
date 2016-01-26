@@ -106,7 +106,9 @@
 			    	</a>
 			  	</div>
 			  	<div class="media-body" style="margin-bottom:0px;">
-			    	<h4 class="media-heading" style="font-weight:bold; margin-bottom:0px; margin-top:3px;">{{ commit.message }}</h4>
+			    	<h4 class="media-heading" style="font-weight:bold; margin-bottom:0px; margin-top:3px;">
+                        <a href="../{{ commit.id }}" style="color:#000;">{{ commit.message }}</a>
+                    </h4>
 			    	<h6 class="commit_username" style="font-weight:700; color:#888; display:inline-block;">{{ commit.userprofile.user.username }}</h6>
 			    	<h6 class="commit_time" style="display:inline-block;"><time class="timeago" datetime="{{ commit.created_time | date:'c' }}"></time></h6>
 

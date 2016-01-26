@@ -70,18 +70,19 @@ class Commit(models.Model):
     def __str__(self):
         return 'Commit: %s/%s/%s/%d' % (self.branch.repository.userprofile.user.username, self.branch.repository.name, self.branch.name, self.id)
 
-    def clone(self):
+    def clone(self, userprofile):
         commit = Commit()
         commit.branch = self.branch
         commit.title = self.title
         commit.meter = self.meter
         commit.key = self.key
         commit.message = self.message
+        commit.userprofile = userprofile
         commit.save()
         for part in self.part.all():
             p = part.clone()
-            part.commit = commit
-            part.save()
+            p.commit = commit
+            p.save()
         return commit
 
     def get_meta(self):

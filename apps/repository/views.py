@@ -97,7 +97,7 @@ def create_branch(request, username, repo_name):
     if request.method == 'POST':
         branch_form = BranchForm(request.POST, repository=repository)
         if branch_form.is_valid():
-            branch = branch_form.save()
+            branch = branch_form.save(userprofile=request.user.userprofile)
             return redirect('../' + branch.name)
     else:
         branch_form = BranchForm()
