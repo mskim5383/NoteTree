@@ -49,7 +49,7 @@
 	  				</div>
 	  						<ul class="list-group">
 	  						{% for cont in contributor|slice:":5"%}
-                            <a class="list-group-item" id = "pl"{{ forloop.counter }} href="./{{ cont.repository.name }}">{{ cont.repository.name }}</a>
+                            <a class="list-group-item" id = "pl"{{ forloop.counter }} href="../{{ cont.repository }}">{{ cont.repository.name }}</a>
 	      					{% endfor %}
 	      					</ul>
 				</div>
