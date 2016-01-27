@@ -2,15 +2,33 @@
 {% load bootstrap %}
 {% block content %}
 <div class="container">
-    <form action="./" method="POST">
+    <form action="./" method="POST" style="width:75%; margin:auto; margin-top:50px; margin-bottom:50px">
+        <h3 style="margin-bottom:50px;">Add Contributor to Your Repository</h3>
         {% csrf_token %}
         {{ contributor_form|bootstrap }}
         <button type="submit" class="btn btn-default">Create</button>
+
+        <h3 style="margin-bottom:50px;margin-top:50px;">Contributor to this Repository</h3>
+        <ul class="list-group">
+        {% for contributor in repository.contributor.all %}
+            <li class="list-group-item" >
+                    <div class="media">
+                        <div class="media-left">
+                            <a href="#">
+                                <img class="media-object" src="{{ contributor.userprofile.thumbnail_url }}" style="width:45px; height:45px;">
+                            </a>
+                        </div>
+                        <div class="media-body" style="margin-bottom:0px;">
+                            <h4 class="media-heading" style="font-weight:bold; margin-bottom:0px; margin-top:3px;">
+                                <a href="/{{ contributor.userprofile.user.username }}" style="color:#000;">{{ contributor.userprofile.user.username }}</a>
+                            </h4>
+                        </div>
+                </div>
+            </li>
+        {% endfor %}
+        </ul>
     </form>
     <div>
-    {% for contributor in repository.contributor.all %}
-        <span>{{ contributor.userprofile }}</span>
-    {% endfor %}
     </div>
 </div>
 {% endblock %}
